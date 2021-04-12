@@ -1,7 +1,6 @@
 package com.example.A4_1155150604;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class LoginTask extends AsyncTask<String, Void, Void> {
+public class SignUpTask extends AsyncTask<String, Void, Void> {
     private Context context;
     private static ArrayList<String> para_names = new ArrayList<String>(Arrays.asList("name", "password"));
     private ArrayList<String> para_values = new ArrayList<String>();
@@ -19,9 +18,8 @@ public class LoginTask extends AsyncTask<String, Void, Void> {
     private String message;
     private String name;
     private String password;
-    int user_id = 0;
 
-    public LoginTask(String name, String password, Context context) {
+    public SignUpTask(String name, String password, Context context) {
         this.name = name;
         this.password = password;
         this.context = context;
@@ -42,7 +40,6 @@ public class LoginTask extends AsyncTask<String, Void, Void> {
             String status = json.getString("status");
             if (status.equals("OK")) {
                 this.result = "OK";
-                this.user_id = json.getInt("user_id");
             } else if (status.equals("ERROR")) {
                 this.result = "ERROR";
                 this.message = json.getString("message");
@@ -57,14 +54,12 @@ public class LoginTask extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         if (this.result == null) {
-            Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Sign up failed", Toast.LENGTH_SHORT).show();
         } else if (this.result.equals("OK")) {
-            ChatroomActivityFragment.setLoginInformation(true, name, user_id);
-            Toast.makeText(context, "You have successfully logged in as " + name, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(context, ChatroomActivity.class);
-            context.startActivity(intent);
+            Toast.makeText(context, "Sign up successful, please log in", Toast.LENGTH_SHORT).show();
         } else if (this.result.equals("ERROR")) {
             Toast.makeText(context, this.message, Toast.LENGTH_SHORT).show();
         }
     }
 }
+
