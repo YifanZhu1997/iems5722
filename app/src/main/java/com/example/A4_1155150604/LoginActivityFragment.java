@@ -33,12 +33,16 @@ public class LoginActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String userName = et_user_name.getText().toString();
+                String userPassword = et_user_password.getText().toString();
+
+                et_user_name.setText("");
+                et_user_password.setText("");
+
                 if (userName.equals("")) {
                     Toast.makeText(getActivity(), R.string.user_name_empty, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                String userPassword = et_user_password.getText().toString();
                 if (userPassword.equals("")) {
                     Toast.makeText(getActivity(), R.string.user_password_empty, Toast.LENGTH_SHORT).show();
                     return;
@@ -52,6 +56,11 @@ public class LoginActivityFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String userName = et_user_name.getText().toString();
+                String userPassword = et_user_password.getText().toString();
+
+                et_user_name.setText("");
+                et_user_password.setText("");
+                
                 if (userName.equals("")) {
                     Toast.makeText(getActivity(), R.string.user_name_empty, Toast.LENGTH_SHORT).show();
                     return;
@@ -62,7 +71,6 @@ public class LoginActivityFragment extends Fragment {
                     return;
                 }
 
-                String userPassword = et_user_password.getText().toString();
                 if (userPassword.equals("")) {
                     Toast.makeText(getActivity(), R.string.user_password_empty, Toast.LENGTH_SHORT).show();
                     return;
