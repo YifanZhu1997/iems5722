@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">A4_1155150604</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="fragment_main">fragment_main</string>
+    <string name="fragment_chat">fragment_chat</string>
+    <string name="fragment_login">fragment_login</string>
+    <string name="default_chatroom">Default Chatroom</string>
+    <string name="previous">Previous</string>
+
+    <string name="exit">Exit</string>
+    <string name="refresh">Refresh</string>
+    <string name="socket_connect_error">Socket connect error</string>
+    <string name="socket_user_joined">Socket connected, you have successfully enrolled in this chatroom</string>
+    <string name="socket_disconnected">Socket disconnected</string>
+    <string name="input_text_hint">Input Your Text Here</string>
+    <string name="input_user_name_hint">Your Username</string>
+    <string name="input_user_id_hint">Your UserID</string>
+
+    <string name="user_name_empty">Please enter your username</string>
+    <string name="user_id_empty">Please enter your user ID</string>
+</resources>

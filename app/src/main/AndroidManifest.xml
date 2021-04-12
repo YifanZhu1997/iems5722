@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.A4_1155150604">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/cuhk"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/cuhk"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ChatApp">
+        <activity
+            android:name="com.example.A4_1155150604.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.ChatApp.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.A4_1155150604.ChatActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ChatApp.NoActionBar"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.example.A4_1155150604.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.A4_1155150604.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.example.A4_1155150604.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ChatApp.NoActionBar"
+            android:launchMode="singleTop"
+            android:parentActivityName="com.example.A4_1155150604.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.A4_1155150604.MainActivity" />
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>
