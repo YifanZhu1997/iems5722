@@ -53,7 +53,7 @@ public class Utils {
         return json.toString();
     }
 
-    public static String postMessage(String urlString, ArrayList<String> para_names, ArrayList<String> para_values) {
+    public static String postHTTPRequest(String urlString, ArrayList<String> para_names, ArrayList<String> para_values) {
         StringBuilder json = new StringBuilder();
         try {
             URL url = new URL(urlString);

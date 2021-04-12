@@ -29,7 +29,7 @@ public class PostMessageTask extends AsyncTask<String, Void, Void> {
         this.para_values.add(new_message.user_name);
         this.para_values.add(new_message.content);
 
-        String json_result = Utils.postMessage(strings[0], para_names, para_values);
+        String json_result = Utils.postHTTPRequest(strings[0], para_names, para_values);
         if (json_result.equals("")) {
             return null;
         }

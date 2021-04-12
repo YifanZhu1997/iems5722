@@ -8,9 +8,4 @@
         android:title="@string/refresh"
         android:icon="@mipmap/ic_refresh_foreground"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/action_exit"
-        android:orderInCategory="100"
-        android:title="@string/exit"
-        app:showAsAction="never" />
 </menu>

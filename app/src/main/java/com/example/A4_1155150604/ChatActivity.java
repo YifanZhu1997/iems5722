@@ -1,6 +1,5 @@
 package com.example.A4_1155150604;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,13 +36,6 @@ public class ChatActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         switch (id) {
-            case R.id.action_exit:
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                System.exit(0);
-                return true;
             case R.id.action_refresh:
                 ChatActivityFragment fragment = (ChatActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_chat);
                 fragment.refreshFirstPage();

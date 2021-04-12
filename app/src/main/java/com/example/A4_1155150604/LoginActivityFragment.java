@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 public class LoginActivityFragment extends Fragment {
     private EditText et_user_name;
-    private EditText et_user_id;
+    private EditText et_user_password;
 
     @Override
     public View onCreateView(
@@ -28,7 +28,7 @@ public class LoginActivityFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         et_user_name = view.findViewById(R.id.et_user_name);
-        et_user_id = view.findViewById(R.id.et_user_id);
+        et_user_password = view.findViewById(R.id.et_user_password);
 
         view.findViewById(R.id.bt_login).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,28 +39,19 @@ public class LoginActivityFragment extends Fragment {
                     return;
                 }
 
-                String userId = et_user_id.getText().toString();
-                if (userId.equals("")) {
-                    Toast.makeText(getActivity(), R.string.user_id_empty, Toast.LENGTH_SHORT).show();
+                String userPassword = et_user_password.getText().toString();
+                if (userPassword.equals("")) {
+                    Toast.makeText(getActivity(), R.string.user_password_empty, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                int intUserId = 0;
-                try {
-                    intUserId = Integer.valueOf(userId).intValue();
-                    if (intUserId < 0) {
-                        Toast.makeText(getActivity(), "UserID format error", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                } catch (NumberFormatException e) {
-                    Toast.makeText(getActivity(), "UserID format error", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                MainActivityFragment.setLoginInformation(true, userName, intUserId);
+                new LoginTask(userName,userPassword,getContext()).execute("http://3.17.158.90/api/a3/login");
+                /*
+                ChatroomActivityFragment.setLoginInformation(true, userName, intUserId);
                 Toast.makeText(getActivity(), "You have successfully logged in as " + userName, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), ChatroomActivity.class);
                 startActivity(intent);
+                */
             }
         });
 

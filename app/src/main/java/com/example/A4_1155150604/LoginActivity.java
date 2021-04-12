@@ -1,6 +1,5 @@
 package com.example.A4_1155150604;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,10 +14,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("LOGIN");
+        toolbar.setTitle("LOGIN/SIGN UP");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -36,14 +33,6 @@ public class LoginActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_exit) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            System.exit(0);
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 }

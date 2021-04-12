@@ -13,12 +13,12 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-public class MainActivityFragment extends Fragment {
+public class ChatroomActivityFragment extends Fragment {
     private ArrayList<Chatroom> chatrooms;
     private ChatroomAdapter chatroomAdapter;
     private ListView lv;
-    private static String user_name;
-    private static int user_id;
+    private static String user_name = "";
+    private static int user_id = 0;
     private static boolean hasLoggedIn = false;
 
     @Override
@@ -27,7 +27,7 @@ public class MainActivityFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_chatroom, container, false);
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivityFragment extends Fragment {
 
         lv = view.findViewById(R.id.listview_main);
         chatrooms = new ArrayList<Chatroom>();
-        chatroomAdapter = new ChatroomAdapter(getActivity(), R.layout.listview_main_item, chatrooms);
+        chatroomAdapter = new ChatroomAdapter(getActivity(), R.layout.listview_chatroom_item, chatrooms);
         lv.setAdapter(chatroomAdapter);
 
         FetchChatroomListTask task = new FetchChatroomListTask(chatrooms, chatroomAdapter, lv, getContext());
@@ -70,4 +70,5 @@ public class MainActivityFragment extends Fragment {
         user_name = userName;
         user_id = userId;
     }
+
 }
