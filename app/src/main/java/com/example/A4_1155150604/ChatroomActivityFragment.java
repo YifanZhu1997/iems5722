@@ -17,7 +17,7 @@ public class ChatroomActivityFragment extends Fragment {
     private ArrayList<Chatroom> chatrooms;
     private ChatroomAdapter chatroomAdapter;
     private ListView lv;
-    private static String user_name = "";
+    public static String user_name = "";
     private static int user_id = 0;
     private static boolean hasLoggedIn = false;
 

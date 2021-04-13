@@ -22,6 +22,22 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/red_envelope_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/red_envelope">
+
+        <TextView
+            android:id="@+id/tv_red_envelope"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/right_layout"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -38,7 +54,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_time"
+        android:id="@+id/extra_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -1,6 +1,7 @@
 package com.example.A4_1155150604;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -47,7 +48,7 @@ public class ChatActivity extends AppCompatActivity {
                 fragment.refreshFirstPage();
                 break;
             case R.id.action_red_envelope:
-                setRedEnvelopeInformation();
+                setRedEnvelopeInformation(this);
                 break;
             default:
 
@@ -56,20 +57,20 @@ public class ChatActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setRedEnvelopeInformation() {
-        LinearLayout layout = new LinearLayout(this);
+    private void setRedEnvelopeInformation(Context context) {
+        LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
-        final EditText totalMoney = new EditText(this);
+        final EditText totalMoney = new EditText(context);
         totalMoney.setHint("Total money");
         totalMoney.setGravity(Gravity.CENTER);
         layout.addView(totalMoney);
 
-        final EditText number = new EditText(this);
+        final EditText number = new EditText(context);
         number.setHint("Number of envelopes");
         number.setGravity(Gravity.CENTER);
         layout.addView(number);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Red Envelope Information").setIcon(R.mipmap.ic_red_envelope_foreground).setView(layout)
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -82,6 +83,10 @@ public class ChatActivity extends AppCompatActivity {
                 String totalMoney_ = totalMoney.getText().toString();
                 String number_ = number.getText().toString();
                 if (checkTotalMoneyFormat(totalMoney_) == true && checkNumberFormat(number_) == true && checkMoneyNumberRelationship(totalMoney_, number_) == true) {
+                    Message new_message = new Message("!@#$(RED_ENVELOPE)!@#$" + "{\"total_money\":" + totalMoney_ + ", \"number\":" + number_ + "}", getUserId_(), getUserName());
+
+                    PostMessageTask task = new PostMessageTask(new_message, getChatroomId(), context);
+                    task.execute("http://3.17.158.90/api/a3/send_message");
                 }
             }
         });
@@ -124,8 +129,8 @@ public class ChatActivity extends AppCompatActivity {
     private boolean checkNumberFormat(String number) {
         try {
             int intNumber = Integer.valueOf(number);
-            if (intNumber <= 0 || intNumber > 100) {
-                Toast.makeText(this, "The number must be between 1 to 100", Toast.LENGTH_SHORT).show();
+            if (intNumber <= 0 || intNumber > 50) {
+                Toast.makeText(this, "The number must be between 1 to 50", Toast.LENGTH_SHORT).show();
                 return false;
             } else {
                 return true;
