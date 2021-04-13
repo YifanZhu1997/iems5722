@@ -4,16 +4,18 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PostMessageTask extends AsyncTask<String, Void, Void> {
-    private static String postMessageFail = "Message posting/broadcasting failed";
     private static ArrayList<String> para_names = new ArrayList<String>(Arrays.asList("chatroom_id", "user_id", "name", "message"));
     private ArrayList<String> para_values = new ArrayList<String>();
     private int chatroomId;
     private Message new_message;
     private Context context;
+    private String message;
     private String result;
 
     public PostMessageTask(Message new_message, int chatroomId, Context context) {
@@ -34,13 +36,28 @@ public class PostMessageTask extends AsyncTask<String, Void, Void> {
             return null;
         }
 
-        this.result = Utils.parsePostMessageResult(json_result);
+        try {
+            JSONObject json = new JSONObject(json_result);
+            String status = json.getString("status");
+            if (status.equals("OK")) {
+                this.result = "OK";
+            } else if (status.equals("ERROR")) {
+                this.result = "ERROR";
+                this.message = json.getString("message");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
+    @Override
     protected void onPostExecute(Void aVoid) {
-        if (result == null || !result.equals("OK")) {
-            Toast.makeText(context, postMessageFail, Toast.LENGTH_SHORT).show();
+        if (this.result == null) {
+            Toast.makeText(context, "Post message failed", Toast.LENGTH_SHORT).show();
+        } else if (this.result.equals("ERROR")) {
+            Toast.makeText(context, this.message, Toast.LENGTH_SHORT).show();
         }
     }
 }
