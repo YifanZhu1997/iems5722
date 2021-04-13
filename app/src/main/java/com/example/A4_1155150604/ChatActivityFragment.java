@@ -67,7 +67,7 @@ public class ChatActivityFragment extends Fragment {
                     e.printStackTrace();
                 }
                 if (new_message != null) {
-                    if (new_message.user_name.equals(idNamePage.user_name) && new_message.user_id == idNamePage.user_id) {
+                    if (new_message.user_id == idNamePage.user_id) {
                         new_message.type = Message.TYPE_SEND;
                         messages.add(new_message);
                         messageAdapter.notifyDataSetChanged();

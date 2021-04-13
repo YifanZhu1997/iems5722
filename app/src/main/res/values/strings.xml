@@ -7,11 +7,11 @@
     <string name="fragment_sign_up">fragment_sign_up</string>
     <string name="default_chatroom">Default Chatroom</string>
     <string name="previous">Previous</string>
-    <string name="user_id_length_hint">Your user ID must be between 4 to 9 chars</string>
 
     <string name="exit">Exit</string>
     <string name="logout">Log out</string>
     <string name="refresh">Refresh</string>
+    <string name="red_envelope">Red Envelope</string>
     <string name="socket_connect_error">Socket connect error</string>
     <string name="socket_user_joined">Socket connected, you have successfully enrolled in this chatroom</string>
     <string name="socket_disconnected">Socket disconnected</string>
@@ -19,7 +19,7 @@
     <string name="input_user_name_hint">Your Username</string>
     <string name="input_user_password_hint">Your Password</string>
     <string name="input_user_id_hint">Your User ID</string>
-
+    <string name="user_id_length_hint">Your user ID must be between 4 to 9 chars</string>
     <string name="user_name_empty">Please enter your username</string>
     <string name="user_name_length_hint">Your username must be between 4 to 20 chars</string>
     <string name="user_id_empty">Please enter your user ID</string>

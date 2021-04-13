@@ -146,7 +146,7 @@ public class Utils {
                 String user_name = messageArray.getJSONObject(i).getString("name");
                 String time = messageArray.getJSONObject(i).getString("message_time");
 
-                if (user_name.equals(idNamePage.user_name) && user_id == idNamePage.user_id) {
+                if (user_id == idNamePage.user_id) {
                     messages.add(0, new Message(id, content, user_id, user_name, Message.TYPE_SEND, time));
                 } else {
                     messages.add(0, new Message(id, content, user_id, user_name, Message.TYPE_RECEIVE, time));
