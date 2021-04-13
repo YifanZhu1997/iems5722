@@ -4,8 +4,10 @@
     <string name="fragment_chatroom">fragment_chatroom</string>
     <string name="fragment_chat">fragment_chat</string>
     <string name="fragment_login">fragment_login</string>
+    <string name="fragment_sign_up">fragment_sign_up</string>
     <string name="default_chatroom">Default Chatroom</string>
     <string name="previous">Previous</string>
+    <string name="user_id_length_hint">Your user ID must be between 4 to 9 chars</string>
 
     <string name="exit">Exit</string>
     <string name="logout">Log out</string>
@@ -16,11 +18,11 @@
     <string name="input_text_hint">Input Your Text Here</string>
     <string name="input_user_name_hint">Your Username</string>
     <string name="input_user_password_hint">Your Password</string>
-    <string name="input_user_id_hint">Your UserID</string>
+    <string name="input_user_id_hint">Your User ID</string>
 
     <string name="user_name_empty">Please enter your username</string>
-    <string name="user_name_too_long">Your username is too long (>20 chars)</string>
+    <string name="user_name_length_hint">Your username must be between 4 to 20 chars</string>
     <string name="user_id_empty">Please enter your user ID</string>
     <string name="user_password_empty">Please enter your password</string>
-    <string name="user_password_too_long">Your password is too long (>20 chars)</string>
+    <string name="user_password_length_hint">Your password must be between 4 to 20 chars</string>
 </resources>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivityFragment">
+    tools:context=".SignUpActivityFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,14 +36,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/bt_login"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_user_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="LOGIN"></Button>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="@string/input_user_name_hint"
+            android:maxLines="3" />
     </LinearLayout>
 
     <LinearLayout
@@ -52,10 +54,10 @@
         android:gravity="center_horizontal">
 
         <Button
-            android:id="@+id/bt_sign_up"
+            android:id="@+id/bt_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SIGN UP"></Button>
+            android:text="CONFIRM"></Button>
     </LinearLayout>
 
 </LinearLayout>
