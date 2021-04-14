@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.A4_1155150604.ChatActivity">
+    <item
+        android:id="@+id/action_red_envelope"
+        android:orderInCategory="100"
+        android:title="@string/red_envelope"
+        android:icon="@mipmap/ic_red_envelope_foreground"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_refresh"
+        android:orderInCategory="100"
+        android:title="@string/refresh"
+        app:showAsAction="never" />
+
+</menu>

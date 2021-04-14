@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_login"
+    app:startDestination="@id/SignUpActivityFragment">
+
+    <fragment
+        android:id="@+id/SignUpActivityFragment"
+        android:name="com.example.A4_1155150604.SignUpActivityFragment"
+        android:label="@string/fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up"></fragment>
+
+</navigation>
