@@ -2,6 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.A4_1155150604.ChatroomActivity">
+    <item android:id="@+id/action_add_friend"
+        android:title="add friend"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/add_icon"/>
     <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <EditText
+            android:id="@+id/id_search_box"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:hint="Please Enter the User ID"
+            android:inputType="number"
+            android:paddingRight="8dp"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/friend_search"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@id/id_search_box"
+            android:layout_weight="1"
+            android:background="@color/purple_200"
+            android:text="Search"
+            android:textColor="@android:color/white"
+            android:textSize="7sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/friend_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/friend_name_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_weight="4"
+            android:text="User Name"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/friend_id_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_weight="5"
+            android:text="User ID"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/add_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:text="Add as Friend"
+            android:textColor="@color/teal_200"
+            android:textSize="8sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
