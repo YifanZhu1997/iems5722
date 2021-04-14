@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class FetchFriendsTask extends AsyncTask<String, Void, Void> {
@@ -28,7 +31,26 @@ public class FetchFriendsTask extends AsyncTask<String, Void, Void> {
             return null;
         }
 
-        Utils.parseJSONFriends(json_result, chatrooms);
+        try {
+            JSONObject json = new JSONObject(json_result);
+            String status = json.getString("status");
+            if (!status.equals("OK")) { //status error
+                return null;
+            }
+            JSONObject data = json.getJSONObject("data");
+
+            JSONArray FriendsArray = data.getJSONArray("friends_name");
+            JSONArray ChatroomsArray = data.getJSONArray("chatrooms");
+
+            for (int i = 0; i < FriendsArray.length(); i++) {
+                String name_friend = FriendsArray.getString(i);
+                int chatroom_id = ChatroomsArray.getInt(i);
+                chatrooms.add(new Chatroom(name_friend, chatroom_id));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 

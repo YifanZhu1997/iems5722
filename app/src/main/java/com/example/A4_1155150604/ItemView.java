@@ -3,7 +3,6 @@ package com.example.A4_1155150604;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 
 public class ItemView extends LinearLayout {
@@ -44,7 +45,7 @@ public class ItemView extends LinearLayout {
         rightDesc = findViewById(R.id.right_desc);
         rightArrow = findViewById(R.id.right_arrow);
         bottomLine = findViewById(R.id.bottom_line);
-        rootView= findViewById(R.id.root_item);
+        rootView = findViewById(R.id.root_item);
         //设置控件属性
         isShowBottomLine = ta.getBoolean(R.styleable.ItemView_show_bottom_line, true);//得到是否显示底部下划线属性
         isShowLeftIcon = ta.getBoolean(R.styleable.ItemView_show_left_icon, true);//得到是否显示左侧图标属性标识
@@ -62,10 +63,9 @@ public class ItemView extends LinearLayout {
     }
 
 
-
     //设置左侧图标
     public void setLeftIcon(int value) {
-        Drawable drawable=getResources().getDrawable(value);
+        Drawable drawable = getResources().getDrawable(value);
         leftIcon.setBackground(drawable);
     }
 
@@ -78,6 +78,7 @@ public class ItemView extends LinearLayout {
     public void setRightDesc(String value) {
         rightDesc.setText(value);
     }
+
     //设置右侧箭头
     public void setShowRightArrow(boolean value) {
         rightArrow.setVisibility(value ? View.VISIBLE : View.INVISIBLE);//设置右侧箭头图标是否显示
@@ -88,15 +89,15 @@ public class ItemView extends LinearLayout {
         bottomLine.setVisibility(value ? View.VISIBLE : View.INVISIBLE);//设置右侧箭头图标是否显示
     }
 
-    public interface itemClickListener{
+    public interface itemClickListener {
         void itemClick(String text);
     }
 
     private itemClickListener listener;
 
     //向外暴漏接口
-    public void setItemClickListener(itemClickListener listener){
-        this.listener=listener;
+    public void setItemClickListener(itemClickListener listener) {
+        this.listener = listener;
     }
 
 }

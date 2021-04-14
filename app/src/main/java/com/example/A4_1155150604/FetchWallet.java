@@ -1,26 +1,10 @@
 package com.example.A4_1155150604;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.tabs.TabItem;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.lang.reflect.Field;
-import java.nio.FloatBuffer;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FetchWallet extends AsyncTask<String, Void, Void> {
     private static String emptyMessageList = "Server returns 0 messages";
@@ -31,7 +15,7 @@ public class FetchWallet extends AsyncTask<String, Void, Void> {
     ItemView mwallet;
 
 
-    public FetchWallet(Context context,int user_id, String user_name, String wallet, ItemView mwallet){
+    public FetchWallet(Context context, int user_id, String user_name, String wallet, ItemView mwallet) {
 
         this.context = context;
         this.user_id = user_id;

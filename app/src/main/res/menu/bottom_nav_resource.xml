@@ -3,17 +3,14 @@
     <item
         android:id="@+id/public_chatrooms"
         android:title="public rooms"
-        android:icon="@drawable/chats"
-        />
+        android:icon="@drawable/chats" />
     <item
         android:id="@+id/friends"
         android:title="friends"
-        android:icon="@drawable/friend"
-        />
+        android:icon="@drawable/friend" />
     <item
         android:id="@+id/wallet"
         android:title="account"
-        android:icon="@drawable/friends"
-        />
+        android:icon="@drawable/friends" />
 
 </menu>

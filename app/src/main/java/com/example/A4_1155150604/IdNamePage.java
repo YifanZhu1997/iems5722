@@ -9,3 +9,4 @@ public class IdNamePage {
     String user_name;
     String chatroom_name;
 }
+

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,7 +17,7 @@
         android:paddingRight="10dp"
         android:textSize="16sp"
         android:background="@drawable/background_login"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 
     <!--android:background="@drawable/bg_username"-->
     <EditText
@@ -34,7 +33,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="@drawable/background_login"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
     <!--android:background="@drawable/bg_username"-->
     <Button
         android:id="@+id/bt_login"
@@ -45,7 +44,7 @@
         android:text="LOGIN"
         android:textColor="#fff"
         android:textSize="12sp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
     <!--android:background="@drawable/bg_btn3"-->
     <Button
         android:id="@+id/bt_sign_up"
@@ -57,7 +56,7 @@
         android:text="SIGN UP"
         android:textColor="#fff"
         android:textSize="12sp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 
     <!--android:background="@drawable/bg_btn3"-->
 </RelativeLayout>

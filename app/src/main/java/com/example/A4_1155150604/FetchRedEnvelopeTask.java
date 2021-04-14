@@ -6,41 +6,34 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class PostMessageTask extends AsyncTask<String, Void, Void> {
-    private static ArrayList<String> para_names = new ArrayList<String>(Arrays.asList("chatroom_id", "user_id", "name", "message"));
-    private ArrayList<String> para_values = new ArrayList<String>();
-    private int chatroomId;
-    private Message new_message;
-    private Context context;
-    private String message;
+public class FetchRedEnvelopeTask extends AsyncTask<String, Void, Void> {
+    private int message_id;
+    private int user_id;
+    private int chatroom_id;
     private String result;
+    private String message;
+    private String money;
+    private Context context;
 
-    public PostMessageTask(Message new_message, int chatroomId, Context context) {
+    public FetchRedEnvelopeTask(int message_id, int user_id, int chatroom_id, Context context) {
+        this.message_id = message_id;
+        this.user_id = user_id;
+        this.chatroom_id = chatroom_id;
         this.context = context;
-        this.chatroomId = chatroomId;
-        this.new_message = new_message;
     }
 
     @Override
     protected Void doInBackground(String... strings) {
-        this.para_values.add(chatroomId + "");
-        this.para_values.add(new_message.user_id + "");
-        this.para_values.add(new_message.user_name);
-        this.para_values.add(new_message.content);
-
-        String json_result = Utils.postHTTPRequest(strings[0], para_names, para_values);
-        if (json_result.equals("")) {
+        String json_result = Utils.fetchPage(String.format(strings[0], message_id, user_id, chatroom_id));
+        if (json_result.equals("")) { //connection failed
             return null;
         }
-
         try {
             JSONObject json = new JSONObject(json_result);
             String status = json.getString("status");
             if (status.equals("OK")) {
                 this.result = "OK";
+                this.money = json.getString("money");
             } else if (status.equals("ERROR")) {
                 this.result = "ERROR";
                 this.message = json.getString("message");
@@ -55,7 +48,9 @@ public class PostMessageTask extends AsyncTask<String, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         if (this.result == null) {
-            Toast.makeText(context, "Post message failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Fetch red envelope failed", Toast.LENGTH_SHORT).show();
+        } else if (this.result.equals("OK")) {
+            Toast.makeText(context, "You have got " + this.money + ", which has been deposited into your balance", Toast.LENGTH_SHORT).show();
         } else if (this.result.equals("ERROR")) {
             Toast.makeText(context, this.message, Toast.LENGTH_SHORT).show();
         }

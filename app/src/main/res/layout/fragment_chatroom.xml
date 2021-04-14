@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:divider="#0000" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
 
         android:id="@+id/bottom_navigation"
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_nav_resource"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 
     <LinearLayout
@@ -30,6 +31,7 @@
         android:background="#F2F2F2"
         android:orientation="vertical"
         android:id="@+id/account_layout">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -90,8 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             app:left_icon="@drawable/info"
-            app:left_text="ID"
-            />
+            app:left_text="ID" />
 
 
         <com.example.A4_1155150604.ItemView
@@ -102,11 +103,8 @@
             app:left_text="Balance" />
 
 
-
-
     </LinearLayout>
 
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
