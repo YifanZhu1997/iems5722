@@ -22,4 +22,5 @@
     <style name="Theme.ChatApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.ChatApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

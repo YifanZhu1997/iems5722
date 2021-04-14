@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.A4_1155150604">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/cuhk"
@@ -10,43 +13,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatApp">
         <activity
-            android:name="com.example.A4_1155150604.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ChatApp.NoActionBar"
             android:launchMode="singleTop"
-            android:parentActivityName="com.example.A4_1155150604.ChatroomActivity">
+            android:parentActivityName=".ChatroomActivity"
+            android:theme="@style/Theme.ChatApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.A4_1155150604.SignUpActivity"
+            android:name=".SignUpActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ChatApp.NoActionBar"
             android:launchMode="singleTop"
-            android:parentActivityName="com.example.A4_1155150604.LoginActivity">
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/Theme.ChatApp.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.A4_1155150604.LoginActivity" />
         </activity>
         <activity
-            android:name="com.example.A4_1155150604.ChatroomActivity"
+            android:name=".ChatroomActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:theme="@style/Theme.ChatApp.NoActionBar"></activity>
+            android:theme="@style/Theme.ChatApp.NoActionBar" />
         <activity
-            android:name="com.example.A4_1155150604.ChatActivity"
+            android:name=".ChatActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ChatApp.NoActionBar"
             android:launchMode="singleTop"
-            android:parentActivityName="com.example.A4_1155150604.ChatroomActivity">
+            android:parentActivityName=".ChatroomActivity"
+            android:theme="@style/Theme.ChatApp.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.A4_1155150604.ChatroomActivity" />
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

@@ -35,4 +35,5 @@
             android:src="@drawable/send_button" />
 
     </LinearLayout>
+
 </LinearLayout>

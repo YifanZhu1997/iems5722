@@ -10,5 +10,4 @@
         android:name="com.example.A4_1155150604.ChatActivityFragment"
         android:label="@string/fragment_chat"
         tools:layout="@layout/fragment_chat"></fragment>
-
 </navigation>

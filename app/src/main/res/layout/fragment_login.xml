@@ -1,61 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".LoginActivityFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/et_user_id"
+        android:layout_width="250sp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/id"
+        android:hint="@string/input_user_id_hint"
+        android:maxLines="3"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="16sp"
+        android:background="@drawable/background_login"
+        android:layout_centerHorizontal="true" />
 
-        <EditText
-            android:id="@+id/et_user_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:hint="@string/input_user_id_hint"
-            android:maxLines="3" />
-    </LinearLayout>
+    <!--android:background="@drawable/bg_username"-->
+    <EditText
+        android:id="@+id/et_user_password"
+        android:layout_width="250sp"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:drawableLeft="@drawable/password"
+        android:hint="@string/input_user_password_hint"
+        android:inputType="textPassword"
+        android:layout_below="@+id/et_user_id"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/background_login"
+        android:layout_centerHorizontal="true" />
+    <!--android:background="@drawable/bg_username"-->
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="200sp"
+        android:layout_height="50sp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/et_user_password"
+        android:text="LOGIN"
+        android:textColor="#fff"
+        android:textSize="12sp"
+        android:layout_centerHorizontal="true" />
+    <!--android:background="@drawable/bg_btn3"-->
+    <Button
+        android:id="@+id/bt_sign_up"
+        android:layout_width="200sp"
+        android:layout_height="50sp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/bt_login"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:text="SIGN UP"
+        android:textColor="#fff"
+        android:textSize="12sp"
+        android:layout_centerHorizontal="true" />
 
-        <EditText
-            android:id="@+id/et_user_password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:hint="@string/input_user_password_hint"
-            android:maxLines="3" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <Button
-            android:id="@+id/bt_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LOGIN"></Button>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
-
-        <Button
-            android:id="@+id/bt_sign_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SIGN UP"></Button>
-    </LinearLayout>
-
-</LinearLayout>
+    <!--android:background="@drawable/bg_btn3"-->
+</RelativeLayout>

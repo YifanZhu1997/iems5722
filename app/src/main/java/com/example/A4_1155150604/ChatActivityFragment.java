@@ -330,4 +330,5 @@ public class ChatActivityFragment extends Fragment {
         idNamePage.chatroom_name = ((ChatActivity) activity).getChatroomName();
     }
 
+
 }

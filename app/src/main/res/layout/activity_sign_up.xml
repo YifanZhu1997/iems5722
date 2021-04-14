@@ -23,4 +23,5 @@
 
     <include layout="@layout/content_sign_up" />
 
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
