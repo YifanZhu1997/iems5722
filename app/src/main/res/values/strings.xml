@@ -16,7 +16,7 @@
     <string name="socket_user_joined">Socket connected, you have successfully enrolled in this chatroom</string>
     <string name="socket_disconnected">Socket disconnected</string>
     <string name="input_text_hint">Input Your Text Here</string>
-    <string name="input_user_name_hint">Your Username</string>
+    <string name="input_user_name_hint">Username</string>
     <string name="input_user_password_hint"> Password</string>
     <string name="input_user_id_hint"> ID</string>
 
