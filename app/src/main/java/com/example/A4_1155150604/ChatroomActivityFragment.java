@@ -31,7 +31,7 @@ public class ChatroomActivityFragment extends Fragment {
     private static String user_name = "";
     private static int user_id = 0;
     private static boolean hasLoggedIn = false;
-    private String wallet;
+    private ArrayList<String> wallet = new ArrayList<>();
     private LinearLayout layout;
     private ImageView mHBack;
     private ImageView mHHead;
@@ -79,17 +79,14 @@ public class ChatroomActivityFragment extends Fragment {
         mNickName.setVisibility(View.GONE);
         mWallet.setVisibility(View.GONE);
 
-
-        //viewHolder.room_layout = (LinearLayout)view.findViewById(R.id.room_layout);
-
         lv = view.findViewById(R.id.listview_main);
-
 
         chatrooms = new ArrayList<Chatroom>();
         chatroomAdapter = new ChatroomAdapter(getActivity(), R.layout.listview_chatroom_item, chatrooms);
         lv.setAdapter(chatroomAdapter);
         FetchChatroomListTask task = new FetchChatroomListTask(chatrooms, chatroomAdapter, lv, getContext());
         task.execute("http://3.17.158.90/api/a3/get_chatrooms");
+
         BottomNavigationView navigation = (BottomNavigationView) view.findViewById(R.id.bottom_navigation);
         navigation.bringToFront();
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -143,15 +140,13 @@ public class ChatroomActivityFragment extends Fragment {
                         mWallet.setVisibility(View.VISIBLE);
 
 
-                        FetchWallet task3 = new FetchWallet(getContext(), user_id, user_name, wallet, mWallet);//,userid,username);//,balance);
-                        task3.execute("http://3.17.158.90/api/a3/get_wallet" + "?user_id=" + user_id);
+                        FetchWallet task3 = new FetchWallet(getContext(), user_id, wallet, mWallet);//,userid,username);//,balance);
+                        task3.execute("http://3.17.158.90/api/a3/get_wallet?user_id=%d");
                         //setContentView(R.layout.activity_main);
                         setData();
                         mUserName.setText(user_name);
                         mID.setText(Integer.toString(user_id));
                         mNickName.setRightDesc(user_name);
-
-
                         return true;
 
                 }
@@ -173,7 +168,6 @@ public class ChatroomActivityFragment extends Fragment {
                     bundle.putString("user_name", user_name);
                     bundle.putInt("chatroom_id", chatroomId);
                     bundle.putInt("user_id", user_id);
-
                     intent.putExtra("data", bundle);
                     startActivity(intent);
                 } else {

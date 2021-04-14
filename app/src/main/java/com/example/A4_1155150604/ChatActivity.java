@@ -14,7 +14,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.math.BigDecimal;
+
 public class ChatActivity extends AppCompatActivity {
+    private IdNamePage idNamePage = new IdNamePage();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,10 +85,14 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String totalMoney_ = totalMoney.getText().toString();
                 String number_ = number.getText().toString();
-                if (checkTotalMoneyFormat(totalMoney_) == true && checkNumberFormat(number_) == true && checkMoneyNumberRelationship(totalMoney_, number_) == true) {
-                    Message new_message = new Message("!@#$(RED_ENVELOPE)!@#$" + "{\"total_money\":" + totalMoney_ + ", \"number\":" + number_ + "}", getUserId_(), getUserName());
-
-                    PostMessageTask task = new PostMessageTask(new_message, getChatroomId(), context);
+                if (checkTotalMoneyFormat(totalMoney_) == true && checkNumberFormat(number_) == true && checkMoneyNumberRelationship(totalMoney_, number_) == true && checkBalance(totalMoney_, idNamePage.balance) == true) {
+                    BigDecimal balance = new BigDecimal(idNamePage.balance);
+                    BigDecimal total_money = new BigDecimal(totalMoney_);
+                    BigDecimal remain = balance.subtract(total_money);
+                    remain.setScale(2);
+                    idNamePage.balance = remain.toString();
+                    Message new_message = new Message("!@#$(RED_ENVELOPE)!@#$" + "{\"total_money\":" + totalMoney_ + ", \"number\":" + number_ + "}", idNamePage.user_id, idNamePage.user_name);
+                    PostMessageTask task = new PostMessageTask(new_message, idNamePage, context, totalMoney_);
                     task.execute("http://3.17.158.90/api/a3/send_message");
                 }
             }
@@ -93,9 +100,29 @@ public class ChatActivity extends AppCompatActivity {
         builder.show();
     }
 
+    public void setIdNamePage() {
+        idNamePage.chatroom_name = getIntent().getBundleExtra("data").getString("chatroom_name");
+        idNamePage.user_name = getIntent().getBundleExtra("data").getString("user_name");
+        idNamePage.chatroomId = getIntent().getBundleExtra("data").getInt("chatroom_id");
+        idNamePage.user_id = getIntent().getBundleExtra("data").getInt("user_id");
+    }
+
+    public IdNamePage getIdNamePage() {
+        return idNamePage;
+    }
+
+    private boolean checkBalance(String money, String balance) {
+        if (new BigDecimal(money).compareTo(new BigDecimal(balance)) == 1) {
+            Toast.makeText(this, "You don't have enough balance", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private boolean checkTotalMoneyFormat(String money) {
         if (money.equals("")) {
-            Toast.makeText(this, "Please enter the money", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Please enter the money", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -149,23 +176,6 @@ public class ChatActivity extends AppCompatActivity {
         }
         return true;
     }
-
-    public String getChatroomName() {
-        return getIntent().getBundleExtra("data").getString("chatroom_name");
-    }
-
-    public int getChatroomId() {
-        return getIntent().getBundleExtra("data").getInt("chatroom_id");
-    }
-
-    public int getUserId_() {
-        return getIntent().getBundleExtra("data").getInt("user_id");
-    }
-
-    public String getUserName() {
-        return getIntent().getBundleExtra("data").getString("user_name");
-    }
-
 }
 
 

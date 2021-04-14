@@ -8,5 +8,6 @@ public class IdNamePage {
     int user_id;
     String user_name;
     String chatroom_name;
+    String balance = "0.00";
 }
 

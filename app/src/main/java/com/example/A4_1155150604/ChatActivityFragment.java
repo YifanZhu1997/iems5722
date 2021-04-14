@@ -141,7 +141,7 @@ public class ChatActivityFragment extends Fragment {
                     Message new_message = new Message(content, idNamePage.user_id, idNamePage.user_name);
                     et_input.setText("");
 
-                    PostMessageTask task = new PostMessageTask(new_message, idNamePage.chatroomId, getContext());
+                    PostMessageTask task = new PostMessageTask(new_message, idNamePage, getContext());
                     task.execute(sendMessageURL);
 
                 } else {
@@ -323,11 +323,9 @@ public class ChatActivityFragment extends Fragment {
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        idNamePage = new IdNamePage();
-        idNamePage.chatroomId = ((ChatActivity) activity).getChatroomId();
-        idNamePage.user_id = ((ChatActivity) activity).getUserId_();
-        idNamePage.user_name = ((ChatActivity) activity).getUserName();
-        idNamePage.chatroom_name = ((ChatActivity) activity).getChatroomName();
+        ((ChatActivity) activity).setIdNamePage();
+        idNamePage = ((ChatActivity) activity).getIdNamePage();
+        new FetchWallet(getContext(), idNamePage).execute("http://3.17.158.90/api/a3/get_wallet?user_id=%d");
     }
 
 
