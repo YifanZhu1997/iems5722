@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -68,7 +67,7 @@ public class ChatActivityFragment extends Fragment {
                     e.printStackTrace();
                 }
                 if (new_message != null) {
-                    if (new_message.user_id == idNamePage.user_id) {
+                    if (new_message.user_name.equals(idNamePage.user_name) && new_message.user_id == idNamePage.user_id) {
                         new_message.type = Message.TYPE_SEND;
                         messages.add(new_message);
                         messageAdapter.notifyDataSetChanged();
@@ -141,22 +140,11 @@ public class ChatActivityFragment extends Fragment {
                     Message new_message = new Message(content, idNamePage.user_id, idNamePage.user_name);
                     et_input.setText("");
 
-                    PostMessageTask task = new PostMessageTask(new_message, idNamePage.chatroomId, getContext());
+                    PostMessageTask task = new PostMessageTask(new_message, idNamePage, getContext());
                     task.execute(sendMessageURL);
 
                 } else {
                     Toast.makeText(getActivity(), input_empty_alert, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            //parent 代表listView View 代表 被点击的列表项 position 代表第几个 id 代表列表编号
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (messages.get((int) id).content.length() > 22 && messages.get((int) id).content.substring(0, 22).equals("!@#$(RED_ENVELOPE)!@#$")) {
-                    int message_id = messages.get((int) id).id;
-                    new FetchRedEnvelopeTask(message_id, idNamePage.user_id, idNamePage.chatroomId, getContext()).execute("http://3.17.158.90/api/a3/fetch_red_envelope?message_id=%d&user_id=%d&chatroom_id=%d");
                 }
             }
         });

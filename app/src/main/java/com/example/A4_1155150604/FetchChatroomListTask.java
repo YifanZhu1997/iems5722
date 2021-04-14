@@ -5,9 +5,6 @@ import android.os.AsyncTask;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class FetchChatroomListTask extends AsyncTask<String, Void, Void> {
@@ -31,28 +28,14 @@ public class FetchChatroomListTask extends AsyncTask<String, Void, Void> {
             return null;
         }
 
-        try {
-            JSONObject json = new JSONObject(json_result);
-            String status = json.getString("status");
-            if (!status.equals("OK")) { //status error
-                return null;
-            }
-
-            JSONArray chatroomArray = json.getJSONArray("data");
-            for (int i = 0; i < chatroomArray.length(); i++) {
-                String name = chatroomArray.getJSONObject(i).getString("name");
-                int id = chatroomArray.getJSONObject(i).getInt("id");
-                chatrooms.add(new Chatroom(name, id));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Utils.parseJSONChatrooms(json_result, chatrooms);
         return null;
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         if (!chatrooms.isEmpty()) {
+
             chatroomAdapter.notifyDataSetChanged();
             lv.setSelection(chatrooms.size() - 1);
         } else {

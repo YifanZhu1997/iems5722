@@ -33,6 +33,7 @@ public class ChatroomAdapter extends ArrayAdapter<Chatroom> {
         Chatroom cr = getItem(position);
         holder.chatroom.setVisibility(View.VISIBLE);
         holder.chatroom.setText(cr.name);
+        //holder.chatroom.setBackgroundResource(R.drawable.background_chatroom);
         return view;
     }
 
