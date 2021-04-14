@@ -2,6 +2,7 @@ package com.example.A4_1155150604;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -36,11 +37,24 @@ public class ChatroomActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
+        /*if (id == R.id.action_logout) {
             ChatroomActivityFragment.setLoginInformation(false, "", 0);
             Toast.makeText(this, "You have logged out", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+        }*/
+        switch (id){
+            case R.id.action_logout:
+                ChatroomActivityFragment.setLoginInformation(false, "", 0);
+                Toast.makeText(this, "You have logged out", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_add_friend:
+                Log.d("ChatroomActivaty", "add_friend button clicked");
+                ChatroomActivityFragment fragment = (ChatroomActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
+                fragment.creatNewDialog();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

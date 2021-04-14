@@ -12,6 +12,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
+
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 public class Utils {
     public static String fetchPage(String urlString) {
@@ -88,5 +93,26 @@ public class Utils {
         }
         return json.toString();
     }
+
+    /**
+     * OkHTTP
+     * @param address
+     * @param params
+     * @param callback
+     */
+    public static void sendOkHttpGetRequest(String address, Map<String, String> params, okhttp3.Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder httpBuilder = HttpUrl.parse(address).newBuilder();
+        if (params != null) {
+            for(Map.Entry<String, String> param : params.entrySet()) {
+                httpBuilder.addQueryParameter(param.getKey(),param.getValue());
+            }
+        }
+        Request request = new Request.Builder()
+                .url(httpBuilder.build())
+                .build();
+        client.newCall(request).enqueue(callback);
+    }
+
 
 }

@@ -2,27 +2,46 @@ package com.example.A4_1155150604;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ChatroomActivityFragment extends Fragment {
     private ArrayList<Chatroom> chatrooms;
@@ -43,6 +62,19 @@ public class ChatroomActivityFragment extends Fragment {
     private ItemView mWallet;
 
 
+    private String URL = "http://3.17.158.90/api/a3/";
+    private String GET_USER_URL = URL + "get_user";
+    private String CHECK_FRIEND_URL = URL + "check_friend";
+    private String BEFRIEND_URL = URL + "add_friends";
+
+    private  AlertDialog.Builder dialogBuilder;
+    private  AlertDialog dialog;
+    private  EditText id_search_box;
+    private  Button friend_search;
+    private  LinearLayout friend_display;
+    private  TextView friend_id_display;
+    private  TextView friend_name_display;
+    private  Button add_friend;
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -192,6 +224,245 @@ public class ChatroomActivityFragment extends Fragment {
         Glide.with(getActivity()).load(R.drawable.head)
                 .bitmapTransform(new CropCircleTransformation(getActivity()))
                 .into(mHHead);
+    }
+
+    /**
+     *Add Friend action
+     * @
+     **/
+    public void creatNewDialog(){
+        dialogBuilder = new AlertDialog.Builder(getActivity());
+        final View friendSearchView = getActivity().getLayoutInflater().inflate(R.layout.dialog_add_friend, null);
+        id_search_box = (EditText) friendSearchView.findViewById(R.id.id_search_box);
+        friend_search = (Button) friendSearchView.findViewById(R.id.friend_search);
+        friend_display = (LinearLayout) friendSearchView.findViewById(R.id.friend_display);
+        friend_name_display = (TextView) friendSearchView.findViewById(R.id.friend_name_display);
+        friend_id_display = (TextView) friendSearchView.findViewById(R.id.friend_id_display);
+
+        add_friend = (Button) friendSearchView.findViewById(R.id.add_friend);
+        dialogBuilder.setView(friendSearchView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+
+        friend_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String friend_id = id_search_box.getText().toString().trim();
+                searchFriend(friend_id);
+            }
+        });
+        add_friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("ChatRoomFragment", "add as friend clicked");
+                if (!add_friend.getText().toString().trim().equalsIgnoreCase("Friended")) {
+                    String friend_id = friend_id_display.getText().toString().trim();
+                    String friend_name = friend_name_display.getText().toString().trim();
+                    add_friend.setEnabled(true);
+                    addFriend(Integer.toString(user_id), friend_id, user_name, friend_name);
+                }
+                else{
+                    add_friend.setEnabled(false);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(),
+                                    "Already added as Friend ", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
+
+    public  void searchFriend(final String friend_id){
+        if (friend_id.isEmpty()){
+            Toast.makeText(getActivity(),
+                    "Please Enter the User ID", Toast.LENGTH_SHORT).show();
+        }
+        else {
+
+            Map<String, String> map = new HashMap<>();
+            map.put("user_id", friend_id);
+            Utils.sendOkHttpGetRequest(GET_USER_URL, map, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(),
+                                    "Server Error, Please try again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    try {
+                        String responseData = response.body().string();
+                        final JSONObject jsonObject = new JSONObject(responseData);
+                        //final JSONObject jsonObject = new JSONObject(response.body().string());
+                        Log.d("Search riend", "get user response: " + jsonObject.toString());
+                        if (jsonObject.getString("status").equalsIgnoreCase("OK")) {
+
+                            final JSONArray data = jsonObject.getJSONArray("data");
+
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Log.d("Searched", "Display User Info");
+                                        /**
+                                         * jasonarray
+                                         * */
+                                        for(int i = 0; i < data.length(); i++)
+                                        {
+                                            friend_name_display.setText(data.getJSONObject(i).getString("name"));
+                                            friend_id_display.setText(data.getJSONObject(i).getString("id"));
+                                            //friend_id_display.setVisibility(View.VISIBLE);
+                                            //friend_name_display.setVisibility(View.VISIBLE);
+                                            checkFriend(Integer.toString(user_id), data.getJSONObject(i).getString("id"));
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                            });
+
+                        } else if (jsonObject.getString("status").equalsIgnoreCase("ERROR")) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        friend_display.setVisibility(View.GONE);
+                                        Toast.makeText(getActivity(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                        Log.d("Search Friend", "NOT FOUND THE USER !!!");
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            });
+        }
+
+    }
+    /**
+     * Check befriend or not
+     * */
+    private void checkFriend(String user_id, String friend_id) {
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", user_id);
+        map.put("friend_id", friend_id);
+        if(user_id.equals(friend_id)){
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(),
+                            "Cannot add yourself as friends", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+            add_friend.setEnabled(false);
+            return;
+        }
+        Utils.sendOkHttpGetRequest(CHECK_FRIEND_URL, map, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),
+                                "Server Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    String responseData = response.body().string();
+                    final JSONObject jsonObject = new JSONObject(responseData);
+                    //final JSONObject jsonObject = new JSONObject(response.body().string());
+                    Log.d("Check Relation","befriended: " + jsonObject.toString());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                if (jsonObject.getString("status").equalsIgnoreCase("OK")) {
+                                    add_friend.setText("Friended");
+                                    add_friend.setEnabled(false);
+
+                                } else {
+                                    add_friend.setEnabled(true);
+                                    add_friend.setText("ADD AS FRIEND");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            friend_display.setVisibility(View.VISIBLE);
+                        }
+                    });
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    /**
+     ** Add as friend post
+     **/
+    private void addFriend(final String user_id, final String friend_id, final String name, final String friend_name) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("user_id", user_id)
+                            .add("friend_id", friend_id)
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(BEFRIEND_URL)
+                            .post(requestBody)
+                            .build();
+                    Response response = null;
+                    response = client.newCall(request).execute();
+                    String result = response.body().string();
+                    Log.d("Befriended", result);
+                    if (result != null) {
+                        final JSONObject jsonObject = new JSONObject(result);
+                        if (jsonObject.getString("status").equalsIgnoreCase("OK")) {
+                            //final JSONObject data = jsonObject.getJSONObject("data");
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    add_friend.setText("Friended");
+                                    add_friend.setEnabled(false);
+                                    //chatroomList.add(data.getString("name"));
+                                    //chat_list.add(data.getString("id"));
+                                    //arrayAdapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 
