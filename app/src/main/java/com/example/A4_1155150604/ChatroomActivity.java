@@ -55,6 +55,16 @@ public class ChatroomActivity extends AppCompatActivity {
                 ChatroomActivityFragment fragment = (ChatroomActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
                 fragment.creatNewDialog();
                 break;
+            case R.id.Gen_QRcode:
+                Log.d("ChatroomActivaty", "My QR Code Generating");
+                ChatroomActivityFragment fragment_qrcode = (ChatroomActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
+                fragment_qrcode.generateQrCode();
+                break;
+            case R.id.scan_QR_Code:
+                Log.d("ChatroomActivaty", "Scan QR Code Generating");
+                ChatroomActivityFragment fragment_scan_qrcode = (ChatroomActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main);
+                fragment_scan_qrcode.scanCode();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

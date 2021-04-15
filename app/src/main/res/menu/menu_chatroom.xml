@@ -6,6 +6,12 @@
         android:title="add friend"
         app:showAsAction="ifRoom"
         android:icon="@drawable/add_icon"/>
+    <item android:id="@+id/Gen_QRcode"
+        android:title="@string/Generate_QR_Code"
+        app:showAsAction="never" />
+    <item android:id="@+id/scan_QR_Code"
+        android:title="@string/Scan_QR_Code"
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"

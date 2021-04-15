@@ -23,6 +23,8 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -465,5 +467,29 @@ public class ChatroomActivityFragment extends Fragment {
         }).start();
     }
 
+    /**
+     * @Function: generate qr code
+     */
+    public void generateQrCode() {
+        dialogBuilder = new AlertDialog.Builder(getActivity());
+        final View MyqrcodeView = getLayoutInflater().inflate(R.layout.fragment_chatroom_genqrcode, null);
+        ImageView qen_QR_Code = (ImageView)MyqrcodeView.findViewById(R.id.qrcode_image);
+        String gen_QR_Code_url = "http://api.qrserver.com/v1/create-qr-code/?data=" + user_id;
+        Picasso.get().load(gen_QR_Code_url).resize(600,600).into(qen_QR_Code);
+        dialogBuilder.setView(MyqrcodeView);
+        dialog = dialogBuilder.create();
+        dialog.show();
+    }
+    /****
+     * @Function: Scan QR code
+     * */
+    public void scanCode() {
+        IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        integrator.setCaptureActivity(CaptureActivity.class);
+        integrator.setOrientationLocked(false);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+        integrator.setPrompt("Scanning Code");
+        integrator.initiateScan();
+    }
 
 }
