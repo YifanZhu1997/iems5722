@@ -40,4 +40,8 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="red_envelope">Red Envelope</string>
 
+    <string name="Generate_QR_Code">My QR Code</string>
+    <string name="Scan_QR_Code">Scan </string>
+
+
 </resources>
