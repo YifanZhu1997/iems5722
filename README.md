@@ -2,7 +2,7 @@
 This is an Andriod online chatting application with some basic features.
 
 ## Log in/out, Sign up (Feature mostly developed by Yifan Zhu, UI mostly developed by Wei Fang)
-Once openning the application, you need to create your account with an unique user name, an unique user ID and your password by using the "Sign up" function, then you can log in using your account. The page will be re-directed to a public chatroom list.
+Once openning the application, you need to create your account with an unique user name, an unique user ID and your password by using the "Sign up" function, then you can log in using your account. The page will be re-directed to a public chatroom list. You can log out when you click the "log out" button in the menu options.
 
 You cannot create an account with a user ID or a user name that is occupied by other users. And there is a length limit and some format requirements applied in user ID, password, and user name. Hints will be sent out while you do the wrong operation.
 
