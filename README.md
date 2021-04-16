@@ -23,3 +23,4 @@ While you are inside a chatroom, you can send out a red envelope with the total 
 
 You cannot fetch the same red envelope twice, or send out a red envelope whose total money is larger than your balance. And there is some format requirements applied in the total money and number. Hints will be sent out while you do the wrong operation.
 
+<img src="Gif/red_envelope.gif" width="25%" />
