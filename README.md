@@ -6,8 +6,7 @@ Once openning the application, you need to create your account with an unique us
 
 You cannot create an account with a user ID or a user name that is occupied by other users. And there is a length limit and some format requirements applied in user ID, password, and user name. Hints will be sent out while you do the wrong operation.
 
-![image](https://github.com/YifanZhu1997/iems5722/tree/master/Gif/login.gif)
-
+<img src="Gif/login.gif" width="25%" />
 ## Bottom Navigation (Mostly by Wei Fang)
 After users log in successfully, they can choose to enter the public chatrooms (open to all), view friends and their account information through the 3 buttons in the navigation on the bottom. The navigation uses the interface of Material Design.
 
