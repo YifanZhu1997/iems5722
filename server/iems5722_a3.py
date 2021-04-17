@@ -162,7 +162,7 @@ def checkFriend():
     data = []
     chatrooms = []
     result_dict = dict()
-    if(user_id == None or friend_id == None):
+    if(user_id == None or friend_id == None or user_id == friend_id):
         print('INVALID PARAMETER')
         result_dict['status'] = 'ERROR'
         result_dict['message'] = 'INVALID PARAMETER'
