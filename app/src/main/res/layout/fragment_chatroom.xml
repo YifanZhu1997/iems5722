@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             app:left_icon="@drawable/info"
-            app:left_text="ID" />
+            app:left_text="Name" />
 
 
         <com.example.A4_1155150604.ItemView
