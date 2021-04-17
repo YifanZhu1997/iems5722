@@ -125,6 +125,7 @@ def getChatrooms():
         data.append({"id": chatroom.id, "name": chatroom.name})
 
     return json.dumps(result_dict, sort_keys=False)
+    
 @app.route('/api/a3/get_user', methods=['GET'])
 def getUser():
     user_id = request.args.get('user_id', type=str, default=None)
@@ -343,21 +344,25 @@ def sendMessage():
     db.session.commit()
 
     new_message=db.session.query(Message).first()
-    post_dict= {'id': new_message.id, 'chatroom_id': new_message.chatroom_id,
-    'user_id': new_message.user_id, 'name': new_message.name, 'message': new_message.message,
-    'message_time': str(new_message.message_time.strftime('%Y-%m-%d %H:%M:%S'))}
+    post_dict = {'id': new_message.id, 'chatroom_id': new_message.chatroom_id,
+                 'user_id': new_message.user_id, 'name': new_message.name, 'message': new_message.message,
+                 'message_time': str(new_message.message_time.strftime('%Y-%m-%d %H:%M:%S'))}
 
     url='http://3.17.158.90:8001/api/a4/broadcast_room'
     requests.post(url,post_dict,headers={'Content-Type':'application/x-www-form-urlencoded'})
 
     #if the mesage is a red envelope
-    if len(new_message.message) > 22 and new_message.message[0:22]=='!@#$(RED_ENVELOPE)!@#$':
-        red_envelope=json.loads(new_message.message[22:])
-        total_money=red_envelope['total_money']
-        number=red_envelope['number']
-        money_list=redpackets.split(total_money, number, min=0.01)
+    if len(new_message.message) > 22 and new_message.message[0:22] == '!@#$(RED_ENVELOPE)!@#$':
+        red_envelope = json.loads(new_message.message[22:])
+        total_money = red_envelope['total_money']
+        number = red_envelope['number']
+        money_list = redpackets.split(total_money, number, min=0.01)
+        user = db.session.query(User).filter(User.id == user_id).first()
+        subtract = Decimal(str(total_money))
+        user.wallet -= subtract
+        db.session.commit()
         for money in money_list:
-            new_envelope=RedEnvelope(message_id=new_message.id,money=float(money),user_id=-1)
+            new_envelope = RedEnvelope(message_id=new_message.id, money=Decimal(money), user_id=-1)
             db.session.add(new_envelope)
             db.session.commit()
 
