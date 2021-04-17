@@ -81,6 +81,7 @@ public class ChatroomActivityFragment extends Fragment {
     private  TextView friend_id_display;
     private  TextView friend_name_display;
     private  Button add_friend;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -272,14 +273,6 @@ public class ChatroomActivityFragment extends Fragment {
                 }
                 else{
                     add_friend.setEnabled(false);
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getActivity(),
-                                    "Already added as Friend ", Toast.LENGTH_SHORT).show();
-                        }
-
-                    });
                 }
             }
         });
@@ -412,9 +405,10 @@ public class ChatroomActivityFragment extends Fragment {
                                 if (jsonObject.getString("status").equalsIgnoreCase("OK")) {
                                     add_friend.setText("Friended");
                                     add_friend.setEnabled(false);
+                                    Toast.makeText(getActivity(),"Already be Friend ", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    add_friend.setEnabled(true);
                                     add_friend.setText("ADD AS FRIEND");
+                                    add_friend.setEnabled(true);
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
