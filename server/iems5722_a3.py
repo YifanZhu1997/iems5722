@@ -181,7 +181,7 @@ def checkFriend():
         print(data)
         return json.dumps(result_dict, sort_keys=False)
         
-    if (len(relation2)>0):
+    elif (len(relation2)>0):
         
         result_dict['status'] = 'OK'
         result_dict['data'] = data
@@ -189,8 +189,12 @@ def checkFriend():
         data.append({"chatroom_id":relation2[0].chatroom_friends_id})
         print(data)
         return json.dumps(result_dict, sort_keys=False)
-        
-    return json.dumps(result_dict, sort_keys=False)        
+    else:
+        result_dict['status'] = 'ERROR'
+        result_dict['message'] = 'NO RELATION WITH THIS ID'
+        return json.dumps(result_dict, sort_keys=False)
+    
+            
         
 
 @app.route("/api/a3/add_friends", methods=['POST'])
