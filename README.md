@@ -49,7 +49,7 @@ The QR code generation is based on an [API](http://goqr.me/api/).
 
 <img src="gif/QR_code.gif" width="25%" />
 
-And [Scan QR Code] function(https://github.com/zxing/zxing) is based on ZXing library.
+And [Scan QR Code](https://github.com/zxing/zxing) function is based on ZXing library.
 
 By scaning the QR Code, the user can add friends as clicking the add friend button.
 
