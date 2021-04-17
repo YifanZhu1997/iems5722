@@ -56,6 +56,7 @@ public class ChatroomActivityFragment extends Fragment {
     private static int user_id = 0;
     private static boolean hasLoggedIn = false;
     private ArrayList<String> wallet = new ArrayList<>();
+    private String currentContent="public rooms";
     private LinearLayout layout;
     private ImageView mHBack;
     private ImageView mHHead;
@@ -131,6 +132,7 @@ public class ChatroomActivityFragment extends Fragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.public_chatrooms:
+                        currentContent="public rooms";
                         chatrooms.clear();
                         chatroomAdapter.notifyDataSetChanged();
                         layout.setVisibility(View.GONE);
@@ -148,6 +150,7 @@ public class ChatroomActivityFragment extends Fragment {
                         task.execute("http://3.17.158.90/api/a3/get_chatrooms");
                         return true;
                     case R.id.friends:
+                        currentContent="friends";
                         chatrooms.clear();
                         chatroomAdapter.notifyDataSetChanged();
                         layout.setVisibility(View.GONE);
@@ -165,6 +168,7 @@ public class ChatroomActivityFragment extends Fragment {
 
                         return true;
                     case R.id.wallet:
+                        currentContent="account";
                         chatrooms.clear();
                         chatroomAdapter.notifyDataSetChanged();
                         layout.setVisibility(View.VISIBLE);
@@ -274,6 +278,7 @@ public class ChatroomActivityFragment extends Fragment {
                             Toast.makeText(getActivity(),
                                     "Already added as Friend ", Toast.LENGTH_SHORT).show();
                         }
+
                     });
                 }
             }
@@ -407,7 +412,6 @@ public class ChatroomActivityFragment extends Fragment {
                                 if (jsonObject.getString("status").equalsIgnoreCase("OK")) {
                                     add_friend.setText("Friended");
                                     add_friend.setEnabled(false);
-
                                 } else {
                                     add_friend.setEnabled(true);
                                     add_friend.setText("ADD AS FRIEND");
@@ -456,9 +460,12 @@ public class ChatroomActivityFragment extends Fragment {
                                 public void run() {
                                     add_friend.setText("Friended");
                                     add_friend.setEnabled(false);
-                                    //chatroomList.add(data.getString("name"));
-                                    //chat_list.add(data.getString("id"));
-                                    //arrayAdapter.notifyDataSetChanged();
+                                    if(currentContent.equals("friends")){
+                                        chatrooms.clear();
+                                        chatroomAdapter.notifyDataSetChanged();
+                                        FetchFriendsTask task2 = new FetchFriendsTask(chatrooms, chatroomAdapter, lv, getContext());
+                                        task2.execute("http://3.17.158.90/api/a3/get_friends" + "?user_id=" + user_id);
+                                    }
                                 }
                             });
                         }
