@@ -45,11 +45,11 @@ After clicking the **Add Friend button** on Tool bar, a dialog will pop and user
 ### Scan QR Code
 <img src="gif/Generate_QRcode.png" width="20%" />
 
-The QR code generation is based on an [API](http://goqr.me/api/). 
+The **QR code generation** is based on [QR code generator webAPI](http://goqr.me/api/). 
 
 <img src="gif/QR_code.gif" width="25%" />
 
-And [Scan QR Code](https://github.com/zxing/zxing) function is based on ZXing library.
+And **Scan QR Code** function is based on [ZXing library](https://github.com/zxing/zxing).
 
 By scaning the QR Code, the user can add friends as clicking the add friend button.
 
