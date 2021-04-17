@@ -60,6 +60,7 @@ public class FetchFriendsTask extends AsyncTask<String, Void, Void> {
             chatroomAdapter.notifyDataSetChanged();
             lv.setSelection(chatrooms.size() - 1);
         } else {
+            chatroomAdapter.notifyDataSetChanged();
             Toast.makeText(context, emptyChatroomList, Toast.LENGTH_SHORT).show();
         }
     }
