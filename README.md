@@ -1,5 +1,5 @@
 # iems5722
-This is an Andriod online chatting application with some basic features. [Demo video](https://mylolis-my.sharepoint.com/:f:/g/personal/b979_365up_site/EjaT-47qNEZAuostPnAXUVkBmkNRZYry8cH0rw7fWVT4PA?e=1EUNiw)
+This is an Andriod online chatting application with some basic features. 
 
 ## Log in/out, Sign up (Feature mostly developed by Yifan Zhu, UI mostly developed by Wei Fang)
 Once openning the application, you need to create your account with an unique user name, an unique user ID and your password by using the **Sign up** function, then you can log in using your account. The page will be re-directed to a public chatroom list. You can log out when you click the **log out** button in the menu options.
@@ -54,3 +54,6 @@ And **Scan QR Code** function is based on [ZXing library](https://github.com/zxi
 By scaning the QR Code, the user can add friends as clicking the add friend button.
 
 <img src="gif/Scan_QRcode.gif" width="25%" />
+
+## A video demo
+[Demo video](https://mylolis-my.sharepoint.com/:f:/g/personal/b979_365up_site/EjaT-47qNEZAuostPnAXUVkBmkNRZYry8cH0rw7fWVT4PA?e=1EUNiw)
