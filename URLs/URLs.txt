@@ -1,0 +1,17 @@
+APIs Used in Assignments
+http://3.17.158.90/api/a3/get_chatrooms
+http://3.17.158.90/api/a3/get_messages
+http://3.17.158.90/api/a3/send_message
+http://3.17.158.90/api/a4/broadcast_room
+
+
+The New APIs:
+
+http://3.17.158.90/api/a3/login
+http://3.17.158.90/api/a3/sign_up
+http://3.17.158.90/api/a3/get_user
+http://3.17.158.90/api/a3/check_friend
+http://3.17.158.90/api/a3/add_friends
+http://3.17.158.90/api/a3/get_wallet
+http://3.17.158.90/api/a3/get_friends
+http://3.17.158.90/api/a3/fetch_red_envelope
