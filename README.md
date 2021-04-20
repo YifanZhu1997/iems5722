@@ -18,7 +18,7 @@ After you click the **friends** button on the bottom, the app will return a list
 If you click the **account** button, you can see a beautiful user interface including information of your ID, username, and balance in your wallet.
 use [Glide Interface](https://github.com/bumptech/glide/tree/v3.7.0)
 
-<img src="gif/User_Info.png" width="25%" />
+<img src="gif/user_Info.png" width="25%" />
 
 ## Red Envelope (Mostly developed by Yifan Zhu)
 While you are inside a chatroom, you can send out a red envelope with the total money and number to be set by clicking the top-right **red envelope** button. The money will be reduced in your balance, and you can check out your remaining balance outside the chatroom.
